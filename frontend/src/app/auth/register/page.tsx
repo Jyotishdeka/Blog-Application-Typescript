@@ -8,14 +8,14 @@ const RegistrationPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Reset error and success messages
-    setError("");
+    // setError("");
     setSuccess("");
 
     // Registration payload
@@ -53,14 +53,14 @@ const RegistrationPage = () => {
         // window.location.href = "/auth/signin";
       } else {
         // Handle error response
-        setError(data.error.message);
+        // setError(data.error.message);
         toast.error(`${data.error.message}`, {
           position: "top-right",
           autoClose: 8000,
         });
       }
     } catch (error) {
-      setError("An error occurred while registering. Please try again.");
+      // setError("An error occurred while registering. Please try again.");
     }
   };
 
@@ -71,7 +71,7 @@ const RegistrationPage = () => {
           Create an Account
         </h2>
         <form onSubmit={handleSubmit}>
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {/* {error && <p className="text-red-500 text-center mb-4">{error}</p>} */}
           {success && <p className="text-green-500 text-center mb-4">{success}</p>}
           
           <div className="mb-4">
