@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['localhost'],
+        domains: ['mindful-sunrise-bc9bc44f46.media.strapiapp.com'],
       },
 };
 
