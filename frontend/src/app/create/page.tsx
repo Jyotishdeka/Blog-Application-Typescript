@@ -109,7 +109,7 @@ const CreateBlog = () => {
     try {
       await createArticle(formData); // Call the API function to send the form data
 
-      toast.success(`Post is Created Successfully`, {
+      toast.success("Post created successfully!", {
         position: "top-right",
         autoClose: 8000,
       });
@@ -120,7 +120,7 @@ const CreateBlog = () => {
       setCategory(""), setContent("");
       router.push("/");
     } catch (error) {
-      toast.error(`Error creating blog:`, {
+      toast.error("Error creating blog. Please try again.", {
         position: "top-right",
         autoClose: 8000,
       });
