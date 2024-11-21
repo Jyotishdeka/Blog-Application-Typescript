@@ -53,7 +53,7 @@ const CreateBlog = () => {
     return bodyArray;
   };
 
-  const jsonContent = convertContentToJson(content);
+  
 
   // Fetch categories on mount
   useEffect(() => {
@@ -78,7 +78,7 @@ const CreateBlog = () => {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("category", category); // Assuming category ID
-    formData.append("Body", JSON.stringify(jsonContent)); // Convert JSON to string
+    formData.append("Body", JSON.stringify(convertContentToJson(content))); // Convert JSON to string
     formData.append("author", user.id); // Assuming author ID
 
     // Append the file (cover) if it exists
