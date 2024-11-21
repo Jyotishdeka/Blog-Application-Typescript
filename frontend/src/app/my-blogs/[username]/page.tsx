@@ -7,7 +7,7 @@ import { ICollectionResponse, IArticle } from "@/types";
 import { fetchArticleByAuthorName, deleteArticle } from "@/http";
 import { toast } from "react-toastify";
 import Image from "next/image";
-import { log } from "console";
+
 
 const UserPage = ({ params }: { params: { username?: string } }) => {
   const [articles, setArticles] = useState<IArticle[]>([]);
