@@ -23,39 +23,73 @@ const Tabs: NextPage<IPropType> = ({ categories }) => {
   };
 
   return (
-    <div className="my-8 flex items-center justify-between border-b-2 border-gray-100 ">
-      <ul className="flex items-center">
-        {/* "Recent" tab for homepage */}
+    <div className="my-8 flex flex-col sm:flex-row items-center justify-between border-b-2 border-gray-100">
+  {/* Category List for Larger Screens */}
+  <div className="w-full sm:w-auto">
+    <ul className="hidden sm:flex flex-col sm:flex-row items-center w-full sm:w-auto">
+      {/* "Recent" tab */}
+      <li
+        className={
+          "border-b-4 rounded-sm mb-2 sm:mb-0 sm:mr-6 p-4 " +
+          `${pathname === "/" ? "border-primary-dark text-primary-dark" : "border-white"}`
+        }
+      >
+        <Link href="/">Recent</Link>
+      </li>
+      {categories?.map((category) => (
         <li
+          key={category.id}
           className={
-            "border-b-4 rounded-sm mr-6 p-4 " +
-            `${pathname === "/" ? "border-primary-dark text-primary-dark" : "border-white"}`
+            "border-b-4 rounded-sm mb-2 sm:mb-0 sm:mr-6 p-4 " +
+            `${isActiveLink(category) ? "border-primary-dark text-primary-dark" : "border-white"}`
           }
         >
-          <Link href="/">Recent</Link>
+          <Link href={`/category/${category.slug}`}>{category.Title}</Link>
         </li>
+      ))}
+    </ul>
 
-        {/* Iterate over categories */}
-        {categories.map((category) => (
-          <li
-            key={category.id}
-            className={
-              "border-b-4 rounded-sm mr-6 p-4 " +
-              `${isActiveLink(category) ? "border-primary-dark text-primary-dark" : "border-white"}`
-            }
-          >
-            <Link href={`/category/${category.slug}`}>{category.Title}</Link>
-          </li>
-        ))}
-      </ul>
+    {/* Dropdown for Mobile */}
+    <select
+      className="block sm:hidden w-full border p-2 rounded-md"
+      value={pathname.includes("/category/") ? pathname.split("/category/")[1] : "/"}
+      onChange={(e) => {
+        const selectedSlug = e.target.value;
+        if (selectedSlug) {
+          window.location.href = selectedSlug === "/" ? "/" : `/category/${selectedSlug}`;
+        }
+      }}
+    >
+      {/* "Recent" option */}
+      <option value="/" className="text-gray-700">
+        Recent
+      </option>
 
-      <input
-        onChange={(e) => handleOnSearch(e.target.value)}
-        type="text"
-        placeholder="Search Blogs Here"
-        className="input input-md input-bordered border-primary w-full max-w-xs"
-      />
-    </div>
+      {/* Category options */}
+      {categories?.map((category) => (
+        <option
+          key={category.id}
+          value={category.slug}
+          className="text-gray-700"
+          selected={isActiveLink(category)} // Optional, as `value` already tracks this
+        >
+          {category.Title}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  {/* Search input */}
+  <div className="mt-4 sm:mt-0">
+    <input
+      onChange={(e) => handleOnSearch(e.target.value)}
+      type="text"
+      placeholder="Search Blogs Here"
+      className="input input-md input-bordered border-primary w-full sm:max-w-xs"
+    />
+  </div>
+</div>
+
   );
 };
 

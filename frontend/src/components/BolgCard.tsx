@@ -23,18 +23,28 @@ const BlogCard = ({ article }: IPropType) => {
   const truncatedDescription =
     article.description.split(" ").slice(0, 6).join(" ") +
     (article.description.split(" ").length > 6 ? "..." : "");
+  console.log("Cover URL:", article.cover?.url);
+  console.log(
+    "Author Thumbnail URL:",
+    article.author?.avatar?.formats?.thumbnail?.url
+  );
 
   return (
     <div className="w-full max-w-sm min-h-[28rem] rounded-lg overflow-hidden shadow-md bg-white hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col">
       {/* Background image with gradient overlay */}
       <div className="relative h-48">
-        <Image
+      <Image
           className="w-full h-full object-cover"
-          src={`http://localhost:1337${article.cover.url}`}
-          alt="Blog Post"
+          src={
+            article.cover?.url?.startsWith('/')
+              ? `https://mindful-sunrise-bc9bc44f46.media.strapiapp.com${article.cover.url}`
+              : article.cover?.url || '/images/default.jpg'
+          }
+          alt={article.title || 'Blog Post'}
           width={400}
           height={200}
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
       </div>
 
@@ -50,16 +60,17 @@ const BlogCard = ({ article }: IPropType) => {
 
         <div className="flex items-center mt-4">
           <div className="rounded-full overflow-hidden mr-3 border border-gray-200">
-            <Image
-              src={
-                article.author?.avatar?.formats?.thumbnail?.url
-                  ? `http://localhost:1337${article.author.avatar.formats.thumbnail.url}`
-                  : '/images/panda.png' // Replace with the path to your default image
-              }
-              alt="Author"
-              width={40}
-              height={40}
-            />
+          <Image
+            className="rounded-full"
+            src={
+              article.author?.avatar?.formats?.thumbnail?.url?.startsWith('/')
+                ? `https://mindful-sunrise-bc9bc44f46.strapiapp.com${article.author.avatar.formats.thumbnail.url}`
+                : article.author?.avatar?.formats?.thumbnail?.url || "/images/panda.png"
+            }
+            alt="User Avatar"
+            width={40}
+            height={40}
+          />
           </div>
           <div>
             <span className="text-sm font-semibold text-gray-700">

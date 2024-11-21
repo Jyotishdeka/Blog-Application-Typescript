@@ -22,7 +22,7 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:1337/api/auth/local", {
+      const response = await fetch("https://mindful-sunrise-bc9bc44f46.strapiapp.com/api/auth/local", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

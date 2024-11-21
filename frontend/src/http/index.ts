@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:1337", // Fallback to a default URL
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // Fallback to a default URL
   headers: {
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_BACKEND_API_KEY}`,
   },

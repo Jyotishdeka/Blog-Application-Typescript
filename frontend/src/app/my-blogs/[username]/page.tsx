@@ -6,6 +6,7 @@ import { FaTrash, FaEdit } from "react-icons/fa"; // Import icons
 import { ICollectionResponse, IArticle } from "@/types";
 import { fetchArticleByAuthorName, deleteArticle } from "@/http";
 import { toast } from "react-toastify";
+import Image from "next/image";
 import { log } from "console";
 
 const UserPage = ({ params }: { params: { username?: string } }) => {
@@ -32,7 +33,6 @@ const UserPage = ({ params }: { params: { username?: string } }) => {
       }
 
       const queryString = qs.stringify(options, { encodeValuesOnly: true });
-      
 
       try {
         const { data }: AxiosResponse<ICollectionResponse<IArticle[]>> =
@@ -46,15 +46,16 @@ const UserPage = ({ params }: { params: { username?: string } }) => {
     };
 
     fetchArticles();
-  }, [LogInUserName,]);
+  }, [LogInUserName]);
 
   console.log(articles);
-  
 
   const handleDelete = async (id: string) => {
     try {
       await deleteArticle(id);
-      setArticles((prevArticles) => prevArticles.filter((article) => article.documentId !== id)); 
+      setArticles((prevArticles) =>
+        prevArticles.filter((article) => article.documentId !== id)
+      );
       toast.success(`delete Successfully`, {
         position: "top-right",
         autoClose: 8000,
@@ -92,9 +93,15 @@ const UserPage = ({ params }: { params: { username?: string } }) => {
               key={article.id}
               className="carousel-item w-80 md:w-96 lg:w-1/3 p-4 bg-white rounded-lg shadow-lg flex flex-col items-center"
             >
-              <img
-                src={`http://localhost:1337${article.cover?.url}`}
-                alt={article.title}
+              <Image
+                src={
+                  article.cover?.url?.startsWith("/")
+                    ? `https://mindful-sunrise-bc9bc44f46.media.strapiapp.com${article.cover.url}`
+                    : article.cover?.url || "/images/default.jpg"
+                }
+                alt={article.title || "Blog Post"}
+                width={320}
+                height={240}
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <div className="text-center">
