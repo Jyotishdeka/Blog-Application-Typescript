@@ -99,11 +99,6 @@ const Contact: React.FC = () => {
 
       {/* Map Section */}
       <section className="w-full max-w-3xl relative animate-fade-in animation-delay-1000">
-        <img
-          src="/map-placeholder.jpg" // Replace with actual map image URL
-          alt="Map"
-          className="w-full rounded-lg shadow-lg"
-        />
         <button className="absolute bottom-5 right-5 bg-gray-800 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-900 transition transform hover:scale-105">
           <Link href={"/"}>Go to Home</Link>
         </button>

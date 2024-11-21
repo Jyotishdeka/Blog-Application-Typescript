@@ -62,12 +62,16 @@ const ArticlePage = async ({ params }: { params: { slug?: string } }) => {
         <h1 className="text-2xl font-bold py-2">{article.title}</h1>
         <div className="flex items-center mb-4">
           <div className="rounded-full overflow-hidden mr-3 border border-gray-200">
-            <Image
-              src={`http://localhost:1337${article.author.avatar.formats.thumbnail.url}`}
+          <Image
+              className="rounded-full"
+              src={
+                article.author?.avatar?.formats?.thumbnail?.url?.startsWith("/")
+                  ? `https://mindful-sunrise-bc9bc44f46.strapiapp.com${article.author.avatar.formats.thumbnail.url}`
+                  : article.author?.avatar?.formats?.thumbnail?.url|| "/images/panda.png"
+              }
               alt="Author"
               width={40}
               height={40}
-              objectFit="cover"
             />
           </div>
           <div>
@@ -79,13 +83,21 @@ const ArticlePage = async ({ params }: { params: { slug?: string } }) => {
           </div>
         </div>
         <div className="text-lg text-gray-600 leading-8">
-          <img
+        <Image
             className="w-full my-12 mb-6"
-            src={`http://localhost:1337${article.cover.url}`}
+            src={
+              article.cover?.url?.startsWith("/")
+                ? `https://mindful-sunrise-bc9bc44f46.media.strapiapp.com${article.cover.url}`
+                : article.cover?.url || "/images/default.jpg"
+            }
+            width={1000}
+            height={500}
             alt={article.title}
           />
-          {/* Render article body */}
+           {/* Render article body */}
+           <div className="shadow-2xl shadow-purple-300 text-black font-medium p-10">
           {renderBody(article.Body)}
+          </div>
         </div>
       </div>
 

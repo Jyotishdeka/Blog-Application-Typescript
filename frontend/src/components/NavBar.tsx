@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; // Use router for navigation
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const NavBar = () => {
   const router = useRouter(); // Router for redirection
@@ -115,9 +116,11 @@ const NavBar = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="/images/panda.png"
+                  <Image
+                    alt="New image description"
+                    src="/images/panda.png" 
+                    width={100} 
+                    height={100} 
                   />
                 </div>
               </div>
@@ -126,7 +129,9 @@ const NavBar = () => {
                 className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-60 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between text-bold">{userData.username}</a>
+                  <a className="justify-between text-bold">
+                    {userData.username}
+                  </a>
                 </li>
 
                 <li>
@@ -134,7 +139,10 @@ const NavBar = () => {
                 </li>
 
                 <li>
-                  <a onClick={handleLogOut} className="justify-between text-red-600">
+                  <a
+                    onClick={handleLogOut}
+                    className="justify-between text-red-600"
+                  >
                     LogOut
                   </a>
                 </li>
