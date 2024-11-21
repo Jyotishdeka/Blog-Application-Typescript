@@ -1,4 +1,3 @@
-// Add this line at the very top of your file
 "use client";
 
 import React, { useState } from "react";
@@ -26,23 +25,23 @@ const RegistrationPage = () => {
     };
 
     try {
-      const response = await fetch("https://mindful-sunrise-bc9bc44f46.strapiapp.com/api/auth/local/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "https://mindful-sunrise-bc9bc44f46.strapiapp.com/api/auth/local/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       const data = await response.json();
-
-      console.log(data);
-      
 
       if (response.ok) {
         // Successfully registered
         setSuccess("Registration successful! Please log in.");
-        toast.success("Registration Successful ! Please Log in..", {
+        toast.success("Registration Successful! Please Log in.", {
           position: "top-right",
           autoClose: 8000,
         });
@@ -53,7 +52,7 @@ const RegistrationPage = () => {
         // window.location.href = "/auth/signin";
       } else {
         // Handle error response
-        // setError(data.error.message);
+        setError(data.error.message);
         toast.error(`${data.error.message}`, {
           position: "top-right",
           autoClose: 8000,
@@ -61,6 +60,10 @@ const RegistrationPage = () => {
       }
     } catch (error) {
       setError("An error occurred while registering. Please try again.");
+      toast.error("An error occurred while registering. Please try again.", {
+        position: "top-right",
+        autoClose: 8000,
+      });
     }
   };
 
@@ -73,7 +76,7 @@ const RegistrationPage = () => {
         <form onSubmit={handleSubmit}>
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           {success && <p className="text-green-500 text-center mb-4">{success}</p>}
-          
+
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
