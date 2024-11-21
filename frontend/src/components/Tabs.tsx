@@ -19,7 +19,7 @@ const Tabs: NextPage<IPropType> = ({ categories }) => {
   };
 
   const handleOnSearch = (query: string) => {
-    console.log("handling Search");
+    console.log("handling Search", query);
   };
 
   return (
