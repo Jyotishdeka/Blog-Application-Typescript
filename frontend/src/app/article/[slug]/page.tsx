@@ -83,13 +83,15 @@ const ArticlePage = async ({ params }: { params: { slug?: string } }) => {
           </div>
         </div>
         <div className="text-lg text-gray-600 leading-8">
-          <img
+          <Image
             className="w-full my-12 mb-6"
             src={
               article.cover?.url?.startsWith("/")
                 ? `https://mindful-sunrise-bc9bc44f46.media.strapiapp.com${article.cover.url}`
                 : article.cover?.url || "/images/default.jpg"
             }
+            width={1000}
+            height={500}
             alt={article.title}
           />
           {/* Render article body */}
