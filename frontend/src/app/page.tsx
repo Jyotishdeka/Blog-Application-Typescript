@@ -1,17 +1,16 @@
 import ArticleList from "@/components/ArticleList";
 import Tabs from "@/components/Tabs";
 import { fetchArticles, fetchCategories } from "@/http";
-import { IArticle, ICategory, ICollectionResponse } from "@/types";
-import { AxiosResponse } from "axios";
+
 import qs from "qs";
+
+
 
 export default async function Home() {
   try {
     // Fetch categories data
-    const {
-      data: categories,
-    }: AxiosResponse<ICollectionResponse<ICategory[]>> =
-      await fetchCategories();
+    const categoriesResponse = await fetchCategories();
+    const categories = categoriesResponse.data.data;
 
     // Fetch articles data
     const options = {
@@ -20,14 +19,13 @@ export default async function Home() {
     };
 
     const queryString = qs.stringify(options);
-
-    const { data: articles }: AxiosResponse<ICollectionResponse<IArticle[]>> =
-      await fetchArticles(queryString);
+    const articlesResponse = await fetchArticles(queryString);
+    const articles = articlesResponse.data.data;
 
     return (
       <div className="mb-20">
-        <Tabs categories={categories.data} /> {/* Pass categories directly */}
-        <ArticleList articles={articles.data} /> {/* Pass articles directly */}
+        <Tabs categories={categories} />
+        <ArticleList articles={articles} />
       </div>
     );
   } catch (error) {
@@ -39,9 +37,6 @@ export default async function Home() {
           <p className="text-gray-700 mb-6">
             There was an issue fetching the data. Please try again later.
           </p>
-          <button className="px-6 py-2 cursor-pointer text-white bg-primary hover:bg-primary-dark rounded-lg shadow-black shadow-2xl transition duration-300">
-            Retry
-          </button>
         </div>
       </div>
     );
