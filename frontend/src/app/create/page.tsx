@@ -87,8 +87,7 @@ const CreateBlog = () => {
       await createArticle(formData);
       toast.success("Post created successfully!");
   
-      // Trigger ISR revalidation
-      await fetch(`/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`);
+     
   
       // Reset form state and redirect
       setTitle("");
