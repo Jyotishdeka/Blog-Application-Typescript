@@ -70,11 +70,11 @@ const CreateBlog = () => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
       if (!user.id) throw new Error("User not found. Please log in.");
-
+  
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
@@ -82,10 +82,15 @@ const CreateBlog = () => {
       formData.append("Body", JSON.stringify(convertContentToJson(content)));
       formData.append("author", user.id);
       if (cover) formData.append("files.cover", cover);
-
+  
+      // Create the blog post
       await createArticle(formData);
       toast.success("Post created successfully!");
-
+  
+      // Trigger ISR revalidation
+      await fetch(`/api/revalidate?secret=${process.env.REVALIDATION_SECRET}`);
+  
+      // Reset form state and redirect
       setTitle("");
       setDescription("");
       setCover(null);
@@ -97,6 +102,7 @@ const CreateBlog = () => {
       console.error("Error:", error);
     }
   };
+  
 
   return (
     <div className="max-w-5xl mx-auto p-6 mb-24 mt-10 bg-white shadow-lg rounded-lg">
