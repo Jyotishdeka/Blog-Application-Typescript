@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { fetchUserByUsername, updateUserById } from "@/http"; // Ensure correct path to fetchUserByUsername function
 
 export default function UpdateProfile({
@@ -133,7 +134,7 @@ export default function UpdateProfile({
           {/* Avatar Section */}
           <div className="flex justify-center">
             <div className="relative">
-              <img
+              <Image
                 src={formData.avatar}
                 alt="Avatar"
                 className="w-32 h-32 rounded-full border-4 border-indigo-600 object-cover shadow-md"
