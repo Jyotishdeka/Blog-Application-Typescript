@@ -118,9 +118,9 @@ const NavBar = () => {
                 <div className="w-10 rounded-full">
                   <Image
                     alt="New image description"
-                    src="/images/panda.png" 
-                    width={100} 
-                    height={100} 
+                    src="/images/panda.png"
+                    width={100}
+                    height={100}
                   />
                 </div>
               </div>
@@ -129,9 +129,12 @@ const NavBar = () => {
                 className="menu menu-sm dropdown-content bg-primary rounded-box z-[1] mt-3 w-60 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between text-bold">
+                  <Link
+                    className="justify-between text-bold"
+                    href={`/profile/${userData.username}/non`}
+                  >
                     {userData.username}
-                  </a>
+                  </Link>
                 </li>
 
                 <li>

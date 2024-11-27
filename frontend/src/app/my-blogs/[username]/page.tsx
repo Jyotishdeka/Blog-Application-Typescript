@@ -7,9 +7,12 @@ import { ICollectionResponse, IArticle } from "@/types";
 import { fetchArticleByAuthorName, deleteArticle } from "@/http";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 
 const UserPage = ({ params }: { params: { username?: string } }) => {
+
+  const router = useRouter();
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true); // Loading state
   const LogInUserName = params.username || null;
@@ -66,9 +69,10 @@ const UserPage = ({ params }: { params: { username?: string } }) => {
     }
   };
 
-  const handleEdit = (id: number) => {
-    console.log(`Edit blog with ID: ${id}`);
+  const handleEdit = (documentId: string) => {
+    console.log(`Edit blog with ID: ${documentId}`);
     // Implement edit logic here
+    router.push(`/edit/${documentId}`);
   };
 
   return (
@@ -120,7 +124,7 @@ const UserPage = ({ params }: { params: { username?: string } }) => {
 
                   {/* Edit Icon */}
                   <button
-                    onClick={() => handleEdit(article.id)}
+                    onClick={() => handleEdit(article.documentId)}
                     className="text-blue-500 hover:text-blue-700 transition"
                   >
                     <FaEdit size={20} />
