@@ -38,9 +38,11 @@ const UpdatePage = ({ params }: { params: { documentId: string } }) => {
           title: response.data.data.title || "",
           description: response.data.data.description || "",
           body: response.data.data.Body
-            ? response.data.data.Body.map(
-                (block: any) => block.children?.[0]?.text || ""
-              ).join("\n") // Concatenate paragraph texts with newlines
+            ? response.data.data.Body.map((block: { children: { text: string }[] }) => 
+                block.children
+                  ?.map((child) => child.text) // Extract text from each child
+                  .join("") // Combine texts from all children of a block
+              ).join("\n") // Concatenate texts from all blocks with newlines
             : "",
         });
       } catch (error) {
