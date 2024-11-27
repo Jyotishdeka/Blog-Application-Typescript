@@ -84,7 +84,7 @@ const Tabs: NextPage<IPropType> = ({ categories }) => {
     <input
       onChange={(e) => handleOnSearch(e.target.value)}
       type="text"
-      placeholder="Search Blogs Here"
+      placeholder="Search Blogs is not working for now"
       className="input input-md input-bordered border-primary w-full sm:max-w-xs"
     />
   </div>
